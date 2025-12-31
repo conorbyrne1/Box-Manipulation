@@ -1,3 +1,4 @@
+/* css below is for index 1 */
 body{
     background-color: lightgray;
 }
@@ -10,4 +11,34 @@ body{
     background-color: darkseagreen;
     position: absolute;
     cursor: pointer;
+}
+/* css below is for index 2 */
+.viewport {
+    width: 600px;
+    height: 400px;
+    border: 2px solid #333;
+    overflow: hidden;
+    position: relative;
+    cursor: grab;
+}
+
+.viewport:active {
+    cursor: grabbing;
+}
+
+.draggable-container {
+    position: absolute;
+    width: 2000px;
+    height: 2000px;
+    background: #f0f0f0;
+    user-select: none;
+}
+
+.element {
+    position: absolute;
+    padding: 20px;
+    background: #4CAF50;
+    color: white;
+    border-radius: 8px;
+    pointer-events: none;
 }
