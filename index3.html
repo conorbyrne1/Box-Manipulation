@@ -1,0 +1,37 @@
+<!-- https://medium.com/@ryan_forrester_/read-csv-files-in-javascript-how-to-guide-8d0ac6df082a-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" integrity="sha512-dfX5uYVXzyU8+KHqj8bjo7UkOdg18PaOtpa48djpNbZHwExddghZ+ZmzWT06R5v6NSk3ZUfsH6FNEDepLx9hPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+<input type="file" id="connection test - Sheet1.csv" />
+<!--<script>-->
+<!--  const patientCSV = "connection test - Sheet1.csv"-->
+
+<!--  console.log(Papa.parse(connection test - Sheet1.csv))-->
+<!--</script>-->
+
+<script>
+    const csvFile = "connection test - Sheet1.csv";
+
+    fetch(csvFile)
+        .then(response => response.text())
+        .then(csvText => {
+            // Display as plain text
+            document.getElementById('output').textContent = csvText;
+
+            // Also parse it if you need the data
+            const results = Papa.parse(csvText, { header: true });
+            console.log("Parsed data:", results.data);
+        })
+        .catch(error => {
+            console.error("Error loading CSV:", error);
+            document.getElementById('output').textContent = "Error loading CSV file";
+        });
+</script>
+
+</body>
+</html>
