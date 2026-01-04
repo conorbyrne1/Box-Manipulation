@@ -42,3 +42,30 @@ body{
     border-radius: 8px;
     pointer-events: none;
 }
+
+/* css below is for 3.1 */
+body{
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+#output {
+    white-space: pre-wrap;
+    background-color: white;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+table {
+    background-color: white;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #4CAF50;
+    color: white;
+}
