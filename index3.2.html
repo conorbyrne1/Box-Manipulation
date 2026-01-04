@@ -60,27 +60,21 @@
     let boxes = ""
 
     for(let i = 0; i < data.length; i++) {
-      boxes += `<div class="element" style="left: ${100 + (i * 100)}px; top: ${100 + (i * 50)}px;"> ${i} </div>`
+      //boxes += `<div class="element" style="left: ${100 + (i * 100)}px; top: ${100 + (i * 50)}px;"> ${i} </div>`
+      boxes += `<div class="element"` //`style="left: ${300 - (i * 100)}px; top: ${500 - (i * 100)}px;">`
+      if(i === 0)
+        boxes += ` style="left: 200px; top: 300px;">`
+      else if(i % 2 === 1)
+        boxes += ` style="left: ${200 - (i * 200)}px; top: ${300 - (i * 200)}px;">`
+      else
+        boxes += ` style="left: ${200 + ((i-1) * 200)}px; top: ${300 - ((i-1) * 200)}px;">`
+
+      boxes += `${headers[1]}: ${data[i][headers[1]]}</br>`;
+      boxes += `${headers[2]}: ${data[i][headers[2]]}</br>`;
+      boxes += `${headers[3]}: ${data[i][headers[3]] || 'N/A'}</br>`;
+      boxes += `</div>`
     }
 
-    let tableHTML = '<table><thead><tr>';
-
-    // Add headers
-    headers.forEach(header => {
-      tableHTML += `<th>${header}</th>`;
-    });
-    tableHTML += '</tr></thead><tbody>';
-
-    // Add data rows
-    data.forEach(row => {
-      tableHTML += '<tr>';
-      headers.forEach(header => {
-        tableHTML += `<td>${row[header] || ''}</td>`;
-      });
-      tableHTML += '</tr>';
-    });
-
-    tableHTML += '</tbody></table>';
     document.getElementById('box-output').innerHTML = boxes;
   }
 
