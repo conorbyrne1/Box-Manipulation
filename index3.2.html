@@ -1,4 +1,8 @@
 <!--THIS PAGE COMBINES INDEXES 2 AND 3.1 -->
+
+
+<!--maybe use something like this in the future? https://dev.to/sekara/how-to-connect-elements-with-lines-on-web-page-5b9n-->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -29,6 +33,8 @@
   </div>
 </div>
 <button class="reset-button">hello</button>
+<p id="test-output">maybe</p>
+<p>hello</p>
 
 <script>
   const csvFile = "connection test - Sheet1.csv";
@@ -75,7 +81,37 @@
       boxes += `</div>`
     }
 
+
+    
+    //
+    // https://www.timothyricks.com/resources/draw-line-between-two-divs
+    //
+
+    let test = ""
+    // for(let i = 0; i < data[i][headers[3]].length; i++) {
+    //   for(let j = 0; j < data[i][headers[1]].length; j++) {
+    //     if(data[i][headers[3]] === data[i][headers[3]][j]) {
+    //       test += `${data[i][headers[3]]} -> ${data[i][headers[3]][j]}`
+    //     }
+    //   }
+    // }
+
+    // for(let i = 0; i < data.length; i++) {
+    //   for(let j = 0; j < data[i][headers[3]].length; j++) {
+    //     if(data[i][headers[3]] === data[i][headers[3]][j]) {
+    //       test += `${data[i][headers[3]]} -> ${data[i][headers[3]][j]}`
+    //     }
+    //   }
+    // }
+
+    for(let i = 0; i < data.length; i++) {
+      let currentName = data[i][headers[1]]
+      let relatedTo = `${data[i][headers[3]] || "N/A"}`
+      test += `${currentName} is related to ${relatedTo} </br>`
+    }
+
     document.getElementById('box-output').innerHTML = boxes;
+    document.getElementById('test-output').innerHTML = test;
   }
 
 
