@@ -1,0 +1,118 @@
+<!--THIS PAGE COMBINES INDEXES 2 AND 3.1 -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" href="styles.css">
+  <script src="dragContainer.js" defer></script>
+  <script src = "https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js" integrity="sha512-dfX5uYVXzyU8+KHqj8bjo7UkOdg18PaOtpa48djpNbZHwExddghZ+ZmzWT06R5v6NSk3ZUfsH6FNEDepLx9hPQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <title>Index 3.2</title>
+</head>
+<body>
+<h1>CSV File Contents</h1>
+<div id="output">Loading CSV file...</div>
+<div id="table-output"></div>
+<!--<div id="box-output"></div>-->
+
+<!--<div class="viewport">-->
+<!--  <div class="draggable-container">-->
+<!--    <div class="element" style="left: 100px; top: 100px;">Element 1</div>-->
+<!--    <div class="element" style="left: 300px; top: 200px;">Element 2</div>-->
+<!--    <div class="element" style="left: 500px; top: 150px;">Element 3</div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--<button class="reset-button">hello</button>-->
+
+<div class="viewport">
+  <div class="draggable-container">
+    <div id="box-output"></div>
+  </div>
+</div>
+<button class="reset-button">hello</button>
+
+<script>
+  const csvFile = "connection test - Sheet1.csv";
+
+  fetch(csvFile)
+          .then(response => response.text())
+          .then(csvText => {
+            // Display as plain text
+            document.getElementById('output').textContent = csvText;
+
+            // Parse and display as table
+            const results = Papa.parse(csvText, { header: true });
+            console.log("Parsed data:", results.data);
+
+            // Create a table from the parsed data
+            displayTable(results.data);
+            displayTableBoxes(results.data);
+          })
+          .catch(error => {
+            console.error("Error loading CSV:", error);
+            document.getElementById('output').textContent = "Error loading CSV file: " + error.message;
+          });
+
+  function displayTableBoxes(data) {
+    if (data.length === 0) return;
+
+    const headers = Object.keys(data[0]);
+
+    let boxes = ""
+
+    for(let i = 0; i < data.length; i++) {
+      boxes += `<div class="element" style="left: ${100 + (i * 100)}px; top: ${100 + (i * 50)}px;"> ${i} </div>`
+    }
+
+    let tableHTML = '<table><thead><tr>';
+
+    // Add headers
+    headers.forEach(header => {
+      tableHTML += `<th>${header}</th>`;
+    });
+    tableHTML += '</tr></thead><tbody>';
+
+    // Add data rows
+    data.forEach(row => {
+      tableHTML += '<tr>';
+      headers.forEach(header => {
+        tableHTML += `<td>${row[header] || ''}</td>`;
+      });
+      tableHTML += '</tr>';
+    });
+
+    tableHTML += '</tbody></table>';
+    document.getElementById('box-output').innerHTML = boxes;
+  }
+
+
+
+  function displayTable(data) {
+    if (data.length === 0) return;
+
+    const headers = Object.keys(data[0]);
+
+
+    let tableHTML = '<table><thead><tr>';
+
+    // Add headers
+    headers.forEach(header => {
+      tableHTML += `<th>${header}</th>`;
+    });
+    tableHTML += '</tr></thead><tbody>';
+
+    // Add data rows
+    data.forEach(row => {
+      tableHTML += '<tr>';
+      headers.forEach(header => {
+        tableHTML += `<td>${row[header] || ''}</td>`;
+      });
+      tableHTML += '</tr>';
+    });
+
+    tableHTML += '</tbody></table>';
+    document.getElementById('table-output').innerHTML = tableHTML;
+  }
+</script>
+
+</body>
+</html>
